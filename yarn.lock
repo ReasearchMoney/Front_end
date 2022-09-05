@@ -1380,7 +1380,7 @@
     webpack "^4.0.0"
     yorkie "^2.0.0"
 
-"@vue/cli-plugin-router@^4.5.19":
+"@vue/cli-plugin-router@^4.5.19", "@vue/cli-plugin-router@~4.5.13":
   version "4.5.19"
   resolved "https://registry.npmjs.org/@vue/cli-plugin-router/-/cli-plugin-router-4.5.19.tgz"
   integrity sha512-3icGzH1IbVYmMMsOwYa0lal/gtvZLebFXdE5hcQJo2mnTwngXGMTyYAzL56EgHBPjbMmRpyj6Iw9k4aVInVX6A==
@@ -8543,9 +8543,9 @@ vue-loader@^17.0.0:
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
 
-vue-router@^3.6.4:
+vue-router@^3.2.0:
   version "3.6.4"
-  resolved "https://registry.npmjs.org/vue-router/-/vue-router-3.6.4.tgz"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.6.4.tgz#46b77eca93cd69f6840c4730b13976a130144ecc"
   integrity sha512-QSJs5aKKPiwBH++gelVbnq0ZFbUZXjlsjAklUM+F8dtd49YY72QsD1uGpBk/cqLK1bkZ8HiqPjS8NkhaGtpqHw==
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
