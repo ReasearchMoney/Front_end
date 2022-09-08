@@ -7,9 +7,15 @@
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
-      <div class="text-right pr-2" id="nav">
+      <div v-if="false" class="text-right pr-2" id="nav">
         <router-link to="/abo">로그인</router-link> |
         <router-link to="/about">회원가입</router-link>
+      </div>
+
+      <div v-else class="text-right pr-2" id="nav">
+        <router-link to="/mypage">내연구</router-link> |
+        <router-link to="/about">스크랩</router-link> |
+        <router-link to="/abo">설정</router-link>
       </div>
     </v-app-bar>
     <v-main>
@@ -25,6 +31,9 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.v-main {
+  background: #e7e7e7;
 }
 #title {
   color: #2979ff;
