@@ -2,20 +2,20 @@
   <v-app id="app">
     <v-app-bar app color="elevation-0 white" white>
       <v-toolbar-title class="pl-2" id="title">
-        <router-link to="/">리서치머니</router-link>
+        <a href="/">리서치머니</a>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
-      <div v-if="false" class="text-right pr-2" id="nav">
-        <router-link to="/abo">로그인</router-link> |
-        <router-link to="/about">회원가입</router-link>
-      </div>
 
-      <div v-else class="text-right pr-2" id="nav">
+      <div v-if="$store.state.user" class="text-right pr-2" id="nav">
         <router-link to="/mypage">내연구</router-link> |
         <router-link to="/about">스크랩</router-link> |
         <router-link to="/abo">설정</router-link>
+      </div>
+      <div v-else class="text-right pr-2" id="nav">
+        <router-link to="/login">로그인</router-link> |
+        <router-link to="/join">회원가입</router-link>
       </div>
     </v-app-bar>
     <v-main>
