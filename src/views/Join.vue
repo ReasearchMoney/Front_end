@@ -28,7 +28,12 @@
           dense
         ></v-text-field>
         <div>비밀번호 확인</div>
-        <v-text-field label="Filled" filled dense></v-text-field>
+        <v-text-field
+          type="password"
+          label="Filled"
+          filled
+          dense
+        ></v-text-field>
         <v-btn type="submit">동의하고 가입 완료하기</v-btn>
       </form>
     </v-container>

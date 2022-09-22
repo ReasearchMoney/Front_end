@@ -8,22 +8,23 @@
       <div v-if="post">
         <v-card
           v-for="item in post"
-          v-bind:key="item.postid"
+          v-bind:key="item.id"
           class="mb-4 pa-2 text-sm-left"
         >
-          <span class="primary--text">{{ item.state }} </span>
+          <span class="primary--text">모집중 </span>
           <span>{{ item.title }}</span>
 
           <span> <v-icon>mdi-bookmark-outline</v-icon></span>
           <div class="text--text text-caption">
             <span>
               <v-btn color="elevation-0 box" x-small>{{
-                item.institution
+                item.institution_name
               }}</v-btn>
             </span>
             <span> {{ item.start_date }}~{{ item.end_date }} |</span>
             <span> {{ item.period }} |</span>
-            <span> {{ item.location }}</span>
+            <span> {{ item.zone_1 }}</span>
+            <span> {{ item.zone_2 }}</span>
           </div>
         </v-card>
       </div>
@@ -52,33 +53,47 @@
 </style>
 <script>
 export default {
+  created() {
+    this.$http
+      .get("/api/post")
+      .then((res) => {
+        const user = res.data.user;
+        this.post = res.data.research;
+        console.log(user);
+        console.log("post");
+        console.log(this.post);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   data() {
     return {
       post: [
-        {
-          postid: 0,
-          state: "모집중",
-          title:
-            "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
-          institution: "성균관대",
-          start_date: "22.09.01",
-          end_date: "22.09.23",
-          period: "1",
-          cost: "2만원",
-          location: "서울시 종로구",
-        },
-        {
-          postid: 1,
-          state: "모집중",
-          title:
-            "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
-          institution: "성균관대",
-          start_date: "22.09.01",
-          end_date: "22.09.23",
-          period: "1",
-          cost: "2만원",
-          location: "서울시 종로구",
-        },
+        // {
+        //   postid: 0,
+        //   state: "모집중",
+        //   title:
+        //     "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
+        //   institution: "성균관대",
+        //   start_date: "22.09.01",
+        //   end_date: "22.09.23",
+        //   period: "1",
+        //   cost: "2만원",
+        //   location: "서울시 종로구",
+        // },
+        // {
+        //   postid: 1,
+        //   state: "모집중",
+        //   title:
+        //     "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
+        //   institution: "성균관대",
+        //   start_date: "22.09.01",
+        //   end_date: "22.09.23",
+        //   period: "1",
+        //   cost: "2만원",
+        //   location: "서울시 종로구",
+        // },
       ],
     };
   },

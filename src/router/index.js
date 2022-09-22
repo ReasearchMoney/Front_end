@@ -51,12 +51,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Join.vue')
   },
   {
-    path: '/join',
-    name: 'Join',
+    path: '/complete',
+    name: 'Join complete',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Join.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Join_c.vue')
   },
    {
     path: '/indexpage',
