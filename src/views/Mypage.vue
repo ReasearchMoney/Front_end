@@ -5,7 +5,8 @@
         <v-icon class="mr-2 primary--text">mdi-domain</v-icon>내가 업로드한
         연구</v-card-title
       >
-      <div v-if="post">
+
+      <div v-if="post[0]">
         <v-card
           v-for="item in post"
           v-bind:key="item.id"
@@ -15,6 +16,17 @@
           <span>{{ item.title }}</span>
 
           <span> <v-icon>mdi-bookmark-outline</v-icon></span>
+          <span>
+            <button
+              @click="deletefunc(item.id)"
+              id="twit-btn"
+              type="submit"
+              class="btn"
+            >
+              delete
+            </button>
+            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+          </span>
           <div class="text--text text-caption">
             <span>
               <v-btn color="elevation-0 box" x-small>{{
@@ -67,34 +79,28 @@ export default {
         console.error(err);
       });
   },
+  methods: {
+    deletefunc(id) {
+      this.$http.post(`/api/post/delete/${id}`).then((res) => {
+        console.log(res);
+      });
+      this.$http
+        .get("/api/post")
+        .then((res) => {
+          const user = res.data.user;
+          this.post = res.data.research;
+          console.log(user);
+          console.log("post");
+          console.log(this.post);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  },
   data() {
     return {
-      post: [
-        // {
-        //   postid: 0,
-        //   state: "모집중",
-        //   title:
-        //     "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
-        //   institution: "성균관대",
-        //   start_date: "22.09.01",
-        //   end_date: "22.09.23",
-        //   period: "1",
-        //   cost: "2만원",
-        //   location: "서울시 종로구",
-        // },
-        // {
-        //   postid: 1,
-        //   state: "모집중",
-        //   title:
-        //     "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
-        //   institution: "성균관대",
-        //   start_date: "22.09.01",
-        //   end_date: "22.09.23",
-        //   period: "1",
-        //   cost: "2만원",
-        //   location: "서울시 종로구",
-        // },
-      ],
+      post: [],
     };
   },
 };
