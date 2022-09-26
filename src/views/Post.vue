@@ -219,13 +219,19 @@
         <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">기관종류</h3>
 
-          <v-text-field
+          <!-- <v-text-field
             label="Filled"
-            name="institution"
+           
             placeholder="Dense & Rounded"
             filled
             dense
-          ></v-text-field>
+          ></v-text-field> -->
+          <v-select
+            :items="items"
+            name="institution"
+            filled
+            label="Filled style"
+          ></v-select>
         </v-card>
         <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">태그</h3>
@@ -251,6 +257,7 @@
 export default {
   data() {
     return {
+      items: ["대학", "기업", "개인"],
       myText: "",
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()

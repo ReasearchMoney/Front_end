@@ -89,78 +89,85 @@
           <v-icon class="mr-2 primary--text">mdi-school</v-icon>
           대학원생 졸업시켜주실분
         </v-card-title>
-        <v-card
-          v-for="item in post"
-          v-bind:key="item.postid"
-          class="mb-4 pa-2 text-sm-left"
-        >
-          <span class="primary--text">{{ item.state }} </span>
-          <span>{{ item.title }}</span>
 
-          <span> <v-icon>mdi-bookmark-outline</v-icon></span>
-          <div class="text--text text-caption">
-            <span>
-              <v-btn color="elevation-0 box" x-small>{{
-                item.institution
-              }}</v-btn>
-            </span>
-            <span> {{ item.start_date }}~{{ item.end_date }} |</span>
-            <span> {{ item.period }} |</span>
-            <span> {{ item.location }}</span>
-          </div>
-        </v-card>
+        <div v-for="item in post" v-bind:key="item.postid">
+          <v-card
+            class="mb-4 pa-2 text-sm-left"
+            v-if="item.institution === '대학'"
+          >
+            <span class="primary--text">{{ item.state }} </span>
+            <span>{{ item.title }}</span>
+
+            <span> <v-icon>mdi-bookmark-outline</v-icon></span>
+            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+            <div class="text--text text-caption">
+              <span>
+                <v-btn color="elevation-0 box" x-small>{{
+                  item.institution
+                }}</v-btn>
+              </span>
+              <span> {{ item.start_date }}~{{ item.end_date }} |</span>
+              <span> {{ item.period }} |</span>
+              <span> {{ item.location }}</span>
+            </div>
+          </v-card>
+        </div>
       </v-card>
       <v-card color="elevation-0 background">
         <v-card-title>
           <v-icon class="mr-2 primary--text">mdi-domain</v-icon>기업에겐 당신의
           목소리가 필요해요</v-card-title
         >
-        <v-card
-          v-for="item in post"
-          v-bind:key="item.postid"
-          class="mb-4 pa-2 text-sm-left"
-        >
-          <span class="primary--text">{{ item.state }} </span>
-          <span>{{ item.title }}</span>
+        <div v-for="item in post" v-bind:key="item.postid">
+          <v-card
+            class="mb-4 pa-2 text-sm-left"
+            v-if="item.institution === '기업'"
+          >
+            <span class="primary--text">{{ item.state }} </span>
+            <span>{{ item.title }}</span>
 
-          <span> <v-icon>mdi-bookmark-outline</v-icon></span>
-          <div class="text--text text-caption">
-            <span>
-              <v-btn color="elevation-0 box" x-small>{{
-                item.institution
-              }}</v-btn>
-            </span>
-            <span> {{ item.start_date }}~{{ item.end_date }} |</span>
-            <span> {{ item.period }} |</span>
-            <span> {{ item.location }}</span>
-          </div>
-        </v-card>
+            <span> <v-icon>mdi-bookmark-outline</v-icon></span>
+            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+            <div class="text--text text-caption">
+              <span>
+                <v-btn color="elevation-0 box" x-small>{{
+                  item.institution
+                }}</v-btn>
+              </span>
+              <span> {{ item.start_date }}~{{ item.end_date }} |</span>
+              <span> {{ item.period }} |</span>
+              <span> {{ item.location }}</span>
+            </div>
+          </v-card>
+        </div>
       </v-card>
       <v-card color="elevation-0 background">
         <v-card-title
           ><v-icon class="mr-2 primary--text">mdi-file-question-outline</v-icon>
           지금 바로 온라인 설문 참여하고 경품 받아 가세요</v-card-title
         >
-        <v-card
-          v-for="item in post"
-          v-bind:key="item.postid"
-          class="mb-4 pa-2 text-sm-left"
-        >
-          <span class="primary--text">{{ item.state }} </span>
-          <span>{{ item.title }}</span>
+        <div v-for="item in post" v-bind:key="item.postid">
+          <v-card
+            class="mb-4 pa-2 text-sm-left"
+            v-if="item.institution === '개인'"
+          >
+            <span class="primary--text">{{ item.state }} </span>
+            <span>{{ item.title }}</span>
 
-          <span> <v-icon>mdi-bookmark-outline</v-icon></span>
-          <div class="text--text text-caption">
-            <span>
-              <v-btn color="elevation-0 box" x-small>{{
-                item.institution
-              }}</v-btn>
-            </span>
-            <span> {{ item.start_date }}~{{ item.end_date }} |</span>
-            <span> {{ item.period }} |</span>
-            <span> {{ item.location }}</span>
-          </div>
-        </v-card>
+            <span> <v-icon>mdi-bookmark-outline</v-icon></span>
+            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+            <div class="text--text text-caption">
+              <span>
+                <v-btn color="elevation-0 box" x-small>{{
+                  item.institution
+                }}</v-btn>
+              </span>
+              <span> {{ item.start_date }}~{{ item.end_date }} |</span>
+              <span> {{ item.period }} |</span>
+              <span> {{ item.location }}</span>
+            </div>
+          </v-card>
+        </div>
       </v-card>
     </v-container>
   </div>
@@ -168,35 +175,49 @@
 
 <script>
 export default {
+  created() {
+    this.$http
+      .get("/api/post")
+      .then((res) => {
+        const user = res.data.user;
+        this.post = res.data.research;
+        console.log(user);
+        console.log("post");
+        console.log(this.post);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   data() {
     return {
       show: false,
       items: ["Foo", "Bar", "Fizz", "Buzz"],
       post: [
-        {
-          postid: 0,
-          state: "모집중",
-          title:
-            "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
-          institution: "성균관대",
-          start_date: "22.09.01",
-          end_date: "22.09.23",
-          period: "1",
-          cost: "2만원",
-          location: "서울시 종로구",
-        },
-        {
-          postid: 1,
-          state: "모집중",
-          title:
-            "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
-          institution: "성균관대",
-          start_date: "22.09.01",
-          end_date: "22.09.23",
-          period: "1",
-          cost: "2만원",
-          location: "서울시 종로구",
-        },
+        //   {
+        //     postid: 0,
+        //     state: "모집중",
+        //     title:
+        //       "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
+        //     institution: "성균관대",
+        //     start_date: "22.09.01",
+        //     end_date: "22.09.23",
+        //     period: "1",
+        //     cost: "2만원",
+        //     location: "서울시 종로구",
+        //   },
+        //   {
+        //     postid: 1,
+        //     state: "모집중",
+        //     title:
+        //       "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
+        //     institution: "성균관대",
+        //     start_date: "22.09.01",
+        //     end_date: "22.09.23",
+        //     period: "1",
+        //     cost: "2만원",
+        //     location: "서울시 종로구",
+        //   },
       ],
       colors: [
         "#F2F6FC",

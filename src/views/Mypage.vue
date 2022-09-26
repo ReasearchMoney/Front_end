@@ -65,20 +65,32 @@
 </style>
 <script>
 export default {
+  computed: {
+    user() {
+      console.log("user");
+      console.log(this.$store.state.user);
+      return this.$store.getters.user;
+    },
+  },
   created() {
     this.$http
-      .get("/api/post")
+      .get(`/api/post/mypage/${this.$store.state.user.id}`)
       .then((res) => {
         const user = res.data.user;
         this.post = res.data.research;
         console.log(user);
         console.log("post");
         console.log(this.post);
+        if (user) {
+          this.$store.commit("setUser", user);
+          console.log(this.$store.state);
+        }
       })
       .catch((err) => {
         console.error(err);
       });
   },
+
   methods: {
     deletefunc(id) {
       this.$http.post(`/api/post/delete/${id}`).then((res) => {
@@ -98,6 +110,7 @@ export default {
         });
     },
   },
+
   data() {
     return {
       post: [],
