@@ -66,6 +66,21 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../components/Page.vue')
   },
+    {
+    path: '/edit/:id',
+    name: 'Edit page',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../components/Edit.vue')
+  }, {
+    path: '/bookmark',
+    name: 'subscribe',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../components/Bookmark.vue')
+  },
    {
     path: '/indexpage',
     name: 'IndexPage',

@@ -99,6 +99,7 @@
             <span>{{ item.title }}</span>
 
             <span> <v-icon>mdi-bookmark-outline</v-icon></span>
+            <button @click="bookmark(item.id)">북마크</button>
             <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
             <div class="text--text text-caption">
               <span>
@@ -127,6 +128,7 @@
             <span>{{ item.title }}</span>
 
             <span> <v-icon>mdi-bookmark-outline</v-icon></span>
+            <button @click="bookmark(item.id)">북마크</button>
             <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
             <div class="text--text text-caption">
               <span>
@@ -155,7 +157,10 @@
             <span>{{ item.title }}</span>
 
             <span> <v-icon>mdi-bookmark-outline</v-icon></span>
+            <button @click="bookmark(item.id)">북마크</button>
+            <button @click="bookmark(item.id)">북마크</button>
             <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+
             <div class="text--text text-caption">
               <span>
                 <v-btn color="elevation-0 box" x-small>{{
@@ -188,6 +193,13 @@ export default {
       .catch((err) => {
         console.error(err);
       });
+  },
+  methods: {
+    bookmark(id) {
+      this.$http.post(`/api/user/${id}/follow`).then((res) => {
+        console.log(res);
+      });
+    },
   },
   data() {
     return {

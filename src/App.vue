@@ -10,7 +10,7 @@
 
       <div v-if="$store.state.user" class="text-right pr-2" id="nav">
         <router-link to="/mypage">내연구</router-link> |
-        <router-link to="/about">스크랩</router-link> |
+        <router-link to="/bookmark">스크랩</router-link> |
         <a href="/" v-on:click="handleLogout()">로그아웃</a>
       </div>
       <div v-else class="text-right pr-2" id="nav">
