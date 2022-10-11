@@ -1,8 +1,10 @@
 <template>
   <v-app id="app">
     <v-app-bar app color="elevation-0 white" white>
-      <v-toolbar-title class="pl-2" id="title">
-        <a href="/">리서치머니</a>
+      <v-toolbar-title class="pl-2 mr-2" id="title">
+        <a href="/">
+          <img src="./assets/research_logo.png" alt="logo" />
+        </a>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
@@ -31,6 +33,9 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+img {
+  width: 5em;
 }
 .v-main {
   background: #e7e7e7;

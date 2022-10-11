@@ -69,13 +69,13 @@
                 active-class="primary accent-4 white--text"
                 column
               >
-                <v-chip color="#FFEFB3">5:30PM</v-chip>
+                <v-chip color="#FFEFB3">#해시태그1</v-chip>
 
-                <v-chip color="#FFEFB3">7:30PM</v-chip>
+                <v-chip color="#FFEFB3">#해시태그2</v-chip>
 
-                <v-chip color="#FFEFB3">8:00PM</v-chip>
+                <v-chip color="#FFEFB3">#해시태그3</v-chip>
 
-                <v-chip color="#FFEFB3">9:00PM</v-chip>
+                <v-chip color="#FFEFB3">#해시태그4</v-chip>
               </v-chip-group>
             </v-card-text>
           </div>
@@ -84,18 +84,16 @@
     </div>
 
     <v-container class="mb-0" style="width: 100vh; max-width: 60%">
+      <v-title> 최근 올라온 공고 </v-title>
       <v-card color="elevation-0 background" class="pb-5">
         <v-card-title>
           <v-icon class="mr-2 primary--text">mdi-school</v-icon>
           대학원생 졸업시켜주실분
         </v-card-title>
 
-        <div v-for="item in post" v-bind:key="item.postid">
-          <v-card
-            class="mb-4 pa-2 text-sm-left"
-            v-if="item.institution === '대학'"
-          >
-            <span class="primary--text">{{ item.state }} </span>
+        <div v-for="item in student.slice(0, 5)" v-bind:key="item.postid">
+          <v-card class="mb-4 pa-3 text-sm-left">
+            <span class="primary--text">{{}} </span>
             <span>{{ item.title }}</span>
 
             <span> <v-icon>mdi-bookmark-outline</v-icon></span>
@@ -119,11 +117,8 @@
           <v-icon class="mr-2 primary--text">mdi-domain</v-icon>기업에겐 당신의
           목소리가 필요해요</v-card-title
         >
-        <div v-for="item in post" v-bind:key="item.postid">
-          <v-card
-            class="mb-4 pa-2 text-sm-left"
-            v-if="item.institution === '기업'"
-          >
+        <div v-for="item in company.slice(0, 5)" v-bind:key="item.postid">
+          <v-card class="mb-4 pa-3 text-sm-left">
             <span class="primary--text">{{ item.state }} </span>
             <span>{{ item.title }}</span>
 
@@ -148,16 +143,12 @@
           ><v-icon class="mr-2 primary--text">mdi-file-question-outline</v-icon>
           지금 바로 온라인 설문 참여하고 경품 받아 가세요</v-card-title
         >
-        <div v-for="item in post" v-bind:key="item.postid">
-          <v-card
-            class="mb-4 pa-2 text-sm-left"
-            v-if="item.institution === '개인'"
-          >
+        <div v-for="item in online.slice(0, 5)" v-bind:key="item.postid">
+          <v-card class="mb-4 pa-3 text-sm-left">
             <span class="primary--text">{{ item.state }} </span>
             <span>{{ item.title }}</span>
 
             <span> <v-icon>mdi-bookmark-outline</v-icon></span>
-            <button @click="bookmark(item.id)">북마크</button>
             <button @click="bookmark(item.id)">북마크</button>
             <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
 
@@ -189,6 +180,30 @@ export default {
         console.log(user);
         console.log("post");
         console.log(this.post);
+
+        let i;
+        for (i = 0; i < this.post.length; i++) {
+          if (this.post[i].institution === "대학") {
+            const x = new Date(this.post[i].start_date_r);
+            const y = new Date(this.post[i].end_date_r);
+            const z = new Date().toISOString().slice(0, 10);
+            if (z < x) {
+              this.s_state.push("모집전");
+            } else if (x <= z || z <= y) {
+              this.s_state.push("모집중");
+            } else {
+              this.s_state.push("모집종료");
+            }
+            this.student.push(this.post[i]);
+          } else if (this.post[i].institution === "기업") {
+            this.company.push(this.post[i]);
+          } else {
+            this.online.push(this.post[i]);
+          }
+        }
+        console.log(this.student);
+        console.log(this.company);
+        console.log(this.online);
       })
       .catch((err) => {
         console.error(err);
@@ -205,47 +220,16 @@ export default {
     return {
       show: false,
       items: ["Foo", "Bar", "Fizz", "Buzz"],
-      post: [
-        //   {
-        //     postid: 0,
-        //     state: "모집중",
-        //     title:
-        //       "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
-        //     institution: "성균관대",
-        //     start_date: "22.09.01",
-        //     end_date: "22.09.23",
-        //     period: "1",
-        //     cost: "2만원",
-        //     location: "서울시 종로구",
-        //   },
-        //   {
-        //     postid: 1,
-        //     state: "모집중",
-        //     title:
-        //       "웹 페이지 스크랩 툴의 사용 패턴 및 사용자 멘탈 모델에 관한 정성적 연구 (인터뷰)",
-        //     institution: "성균관대",
-        //     start_date: "22.09.01",
-        //     end_date: "22.09.23",
-        //     period: "1",
-        //     cost: "2만원",
-        //     location: "서울시 종로구",
-        //   },
-      ],
-      colors: [
-        "#F2F6FC",
-        "secondary",
-        "yellow darken-4",
-        "red lighten-2",
-        "orange darken-1",
-      ],
+      post: [],
+      student: [],
+      company: [],
+      online: [],
+      s_state: [],
+      c_state: [],
+      o_state: [],
+      colors: ["#F2F6FC"],
       cycle: false,
-      slides: [
-        "현재 진행중인 연구 13개를 참여하고 최대 8,9000원 받아가세요!",
-        "두 번째 페이지ㅣㅣ",
-        "빙글빙글",
-        "네번째!",
-        "마지막, 다음 다시 첫번째로!",
-      ],
+      slides: ["현재 진행중인 연구 13개를 참여하고 최대 8,9000원 받아가세요!"],
     };
   },
 };

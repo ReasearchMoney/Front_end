@@ -5,7 +5,16 @@
         <v-icon class="mr-2 primary--text">mdi-domain</v-icon>내가 업로드한
         연구</v-card-title
       >
-
+      <router-link to="/post">
+        <v-btn
+          style="width: 100%"
+          color="button"
+          class="white--text"
+          elevation="2"
+          large
+          >+ 새 연구 생성하기</v-btn
+        >
+      </router-link>
       <div v-if="post[0]">
         <v-card
           v-for="item in post"
@@ -46,16 +55,6 @@
         <div class="text--text">Oops! 아직 진행중인 연구가 없네요....:(</div>
         <div class="text--text">아래 버튼을 눌러 첫 연구를 생성해 보세요!</div>
       </v-card>
-      <router-link to="/post">
-        <v-btn
-          style="width: 100%"
-          color="button"
-          class="white--text"
-          elevation="2"
-          large
-          >+ 새 연구 생성하기</v-btn
-        >
-      </router-link>
     </v-card>
   </v-container>
 </template>

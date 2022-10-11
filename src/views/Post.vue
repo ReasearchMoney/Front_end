@@ -232,14 +232,6 @@
         </v-card>
         <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">기관종류</h3>
-
-          <!-- <v-text-field
-            label="Filled"
-           
-            placeholder="Dense & Rounded"
-            filled
-            dense
-          ></v-text-field> -->
           <v-select
             :items="items"
             name="institution"
