@@ -9,33 +9,54 @@
         <v-select
           v-model="select"
           :items="items"
-          name="institution"
+          name="timeline"
           filled
           dense
         ></v-select>
       </v-card>
-      <div v-for="item in post" v-bind:key="item.postid">
-        <v-card
-          class="mb-4 pa-2 text-sm-left"
-          v-if="item.institution === select"
-        >
-          <span class="primary--text">{{ item.state }} </span>
-          <span>{{ item.title }}</span>
+      <div v-if="select == items[0]">
+        <div v-for="item in post" v-bind:key="item.postid">
+          <v-card class="mb-4 pa-2 text-sm-left">
+            <span class="primary--text">{{ item.state }} </span>
+            <span>{{ item.title }}</span>
 
-          <span> <v-icon>mdi-bookmark-outline</v-icon></span>
-          <button @click="bookmark(item.id)">북마크</button>
-          <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
-          <div class="text--text text-caption">
-            <span>
-              <v-btn color="elevation-0 box" x-small>{{
-                item.institution
-              }}</v-btn>
-            </span>
-            <span> {{ item.start_date }}~{{ item.end_date }} |</span>
-            <span> {{ item.period }} |</span>
-            <span> {{ item.location }}</span>
-          </div>
-        </v-card>
+            <span> <v-icon>mdi-bookmark-outline</v-icon></span>
+            <button @click="bookmark(item.id)">북마크</button>
+            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+            <div class="text--text text-caption">
+              <span>
+                <v-btn color="elevation-0 box" x-small>{{
+                  item.institution
+                }}</v-btn>
+              </span>
+              <span> {{ item.start_date }}~{{ item.end_date }} |</span>
+              <span> {{ item.period }} |</span>
+              <span> {{ item.location }}</span>
+            </div>
+          </v-card>
+        </div>
+      </div>
+      <div v-else>
+        <div v-for="item in post_reverse" v-bind:key="item.postid">
+          <v-card class="mb-4 pa-2 text-sm-left">
+            <span class="primary--text">{{ item.state }} </span>
+            <span>{{ item.title }}</span>
+
+            <span> <v-icon>mdi-bookmark-outline</v-icon></span>
+            <button @click="bookmark(item.id)">북마크</button>
+            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+            <div class="text--text text-caption">
+              <span>
+                <v-btn color="elevation-0 box" x-small>{{
+                  item.institution
+                }}</v-btn>
+              </span>
+              <span> {{ item.start_date }}~{{ item.end_date }} |</span>
+              <span> {{ item.period }} |</span>
+              <span> {{ item.location }}</span>
+            </div>
+          </v-card>
+        </div>
       </div>
     </v-card>
   </v-container>
@@ -49,6 +70,8 @@ export default {
       .then((res) => {
         const user = res.data.user;
         this.post = res.data.research;
+        this.post_reverse = JSON.parse(JSON.stringify(this.post));
+        this.post_reverse.reverse();
         console.log(user);
         console.log("post");
         console.log(this.post);
@@ -59,8 +82,9 @@ export default {
   },
   data() {
     return {
-      items: ["대학", "기업", "개인"],
+      items: ["최근", "오래된순"],
       post: [],
+      post_reverse: [],
       select: "",
     };
   },

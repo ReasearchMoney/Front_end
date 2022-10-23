@@ -176,7 +176,7 @@
             dense
           ></v-text-field>
         </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
+        <!-- <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">이미지</h3>
           <v-file-input
             class="input"
@@ -200,7 +200,7 @@
             width="200px"
             style="border: 2px solid black; margin-left: 100px"
           />
-        </v-card>
+        </v-card> -->
         <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">기관명</h3>
 
@@ -239,7 +239,7 @@
             label="Filled style"
           ></v-select>
         </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
+        <!-- <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">태그</h3>
 
           <v-text-field
@@ -248,7 +248,7 @@
             filled
             dense
           ></v-text-field>
-        </v-card>
+        </v-card> -->
       </v-container>
       <v-btn @click="sendPost()">누르시오</v-btn>
     </form>
@@ -298,7 +298,7 @@ export default {
       this.uploadimageurl = []; // uploadimageurl은 미리보기용으로 사용
       file.forEach((item) => {
         formData.append("filelist", item); // formData의 key: 'filelist', value: 이미지
-        console.log(item);
+        // console.log(item);
         const reader = new FileReader();
         reader.onload = (e) => {
           this.uploadimageurl.push({ url: e.target.result });
@@ -307,11 +307,11 @@ export default {
         reader.readAsDataURL(item);
       });
       formData.append("filelist", file[0].name);
-      console.log(formData.File);
+      // console.log(formData.File);
       this.$http
         .post("/api/post/imagesave", formData)
-        .then((res) => {
-          console.log(res.data.message);
+        .then(() => {
+          // console.log(res.data.message);
           this.image = file[0].name;
           // this.imagecnt = file.length; // 이미지 개수 저장
         })
@@ -353,9 +353,9 @@ export default {
         });
     },
     getTest() {
-      console.log(this.myText);
-      console.log(this.date);
-      console.log(this.date2);
+      // console.log(this.myText);
+      // console.log(this.date);
+      // console.log(this.date2);
     },
   },
 };

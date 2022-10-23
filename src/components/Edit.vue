@@ -191,7 +191,7 @@
             dense
           ></v-text-field>
         </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
+        <!-- <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">이미지</h3>
 
           <v-text-field
@@ -202,7 +202,7 @@
             filled
             dense
           ></v-text-field>
-        </v-card>
+        </v-card> -->
         <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">기관명</h3>
 
@@ -253,7 +253,7 @@
             label="Filled style"
           ></v-select>
         </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
+        <!-- <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">태그</h3>
 
           <v-text-field
@@ -262,7 +262,7 @@
             filled
             dense
           ></v-text-field>
-        </v-card>
+        </v-card> -->
       </v-container>
       <v-btn @click="sendPost()">누르시오</v-btn>
     </form>

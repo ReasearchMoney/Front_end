@@ -13,7 +13,7 @@
       <div v-if="$store.state.user" class="text-right pr-2" id="nav">
         <router-link to="/mypage">내연구</router-link> |
         <router-link to="/bookmark">스크랩</router-link> |
-        <a href="/" v-on:click="handleLogout()">로그아웃</a>
+        <button @click="handleLogout()">로그아웃</button>
       </div>
       <div v-else class="text-right pr-2" id="nav">
         <router-link to="/login">로그인</router-link> |
@@ -72,10 +72,10 @@ export default {
       .get("/api/auth/login")
       .then((res) => {
         const user = res.data.user;
-        const post = res;
+        // const post = res;
         console.log(user);
-        console.log("post");
-        console.log(post);
+        // console.log("post");
+        // console.log(post);
         if (user) {
           this.$store.commit("setUser", user);
         }
@@ -92,15 +92,19 @@ export default {
   methods: {
     handleLogout() {
       console.log("it works1");
-      this.$store.commit("setUser", null);
-      console.log("it works2");
 
-      this.$http.get("/api/auth/logout").then(() => {
-        console.log("this is front");
-        console.log(this.$store.state);
-        //  console.log(this.$store.state.user)
-        console.log("this os end");
-      });
+      console.log("it works2");
+      this.$store.commit("setUser", null);
+      this.$http
+        .get("/api/auth/logout")
+        .then(() => {
+          console.log("send success");
+
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
   },
 };

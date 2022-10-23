@@ -84,21 +84,46 @@
     </div>
 
     <v-container class="mb-0" style="width: 100vh; max-width: 60%">
-      <v-title> 최근 올라온 공고 </v-title>
+      <v-card color="elevation-0 background"
+        ><v-card-title>최근 올라온 공고</v-card-title></v-card
+      >
       <v-card color="elevation-0 background" class="pb-5">
         <v-card-title>
-          <v-icon class="mr-2 primary--text">mdi-school</v-icon>
+          <img
+            id="image"
+            class="mr-2"
+            src="../assets/graduate.png"
+            alt="logo"
+          />
           대학원생 졸업시켜주실분
         </v-card-title>
 
         <div v-for="item in student.slice(0, 5)" v-bind:key="item.postid">
-          <v-card class="mb-4 pa-3 text-sm-left">
-            <span class="primary--text">{{}} </span>
-            <span>{{ item.title }}</span>
+          <v-card class="pa-3 text-sm-left">
+            <v-row>
+              <v-col cols="9">
+                <span class="primary--text">모집중 </span>
+                <span :style="{ color: hover ? 'red' : 'black' }"
+                  ><router-link id="link" :to="`/page/${item.id}`"
+                    >{{ item.title }}
+                  </router-link></span
+                >
+              </v-col>
 
-            <span> <v-icon>mdi-bookmark-outline</v-icon></span>
-            <button @click="bookmark(item.id)">북마크</button>
-            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+              <v-col cols="3">
+                <span class="d-flex justify-end" v-if="book_check[item.id]">
+                  <button @click="deletefunc(item.id)">
+                    <v-icon id="checked">mdi-bookmark</v-icon>
+                  </button>
+                </span>
+                <span class="d-flex justify-end" v-else>
+                  <button @click="bookmark(item.id)">
+                    <v-icon id="book">mdi-bookmark-outline</v-icon>
+                  </button>
+                </span>
+              </v-col>
+            </v-row>
+
             <div class="text--text text-caption">
               <span>
                 <v-btn color="elevation-0 box" x-small>{{
@@ -106,25 +131,48 @@
                 }}</v-btn>
               </span>
               <span> {{ item.start_date }}~{{ item.end_date }} |</span>
-              <span> {{ item.period }} |</span>
-              <span> {{ item.location }}</span>
+              <span> 약{{ item.period }}시간 소요 |</span>
+              <span> {{ item.pay }}원 |</span>
+              <span> {{ item.zone_1 }} {{ item.zone_2 }}</span>
             </div>
           </v-card>
         </div>
       </v-card>
+      <router-link to="/category">모든 연구 보러가기</router-link>
       <v-card color="elevation-0 background">
         <v-card-title>
-          <v-icon class="mr-2 primary--text">mdi-domain</v-icon>기업에겐 당신의
-          목소리가 필요해요</v-card-title
+          <img
+            id="image"
+            class="mr-2"
+            src="../assets/loudIcon.png"
+            alt="logo"
+          />퇴근길에 딱! 기업에겐 당신의 목소리가 필요해요</v-card-title
         >
         <div v-for="item in company.slice(0, 5)" v-bind:key="item.postid">
           <v-card class="mb-4 pa-3 text-sm-left">
-            <span class="primary--text">{{ item.state }} </span>
-            <span>{{ item.title }}</span>
+            <v-row>
+              <v-col cols="9">
+                <span class="primary--text">모집중 </span>
+                <span :style="{ color: hover ? 'red' : 'black' }"
+                  ><router-link id="link" :to="`/page/${item.id}`"
+                    >{{ item.title }}
+                  </router-link></span
+                >
+              </v-col>
 
-            <span> <v-icon>mdi-bookmark-outline</v-icon></span>
-            <button @click="bookmark(item.id)">북마크</button>
-            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+              <v-col cols="3">
+                <span class="d-flex justify-end" v-if="book_check[item.id]">
+                  <button @click="deletefunc(item.id)">
+                    <v-icon id="checked">mdi-bookmark</v-icon>
+                  </button>
+                </span>
+                <span class="d-flex justify-end" v-else>
+                  <button @click="bookmark(item.id)">
+                    <v-icon id="book">mdi-bookmark-outline</v-icon>
+                  </button>
+                </span>
+              </v-col>
+            </v-row>
             <div class="text--text text-caption">
               <span>
                 <v-btn color="elevation-0 box" x-small>{{
@@ -132,26 +180,49 @@
                 }}</v-btn>
               </span>
               <span> {{ item.start_date }}~{{ item.end_date }} |</span>
-              <span> {{ item.period }} |</span>
-              <span> {{ item.location }}</span>
+              <span> 약{{ item.period }}시간 소요 |</span>
+              <span> {{ item.pay }}원 |</span>
+              <span> {{ item.zone_1 }} {{ item.zone_2 }}</span>
             </div>
           </v-card>
         </div>
       </v-card>
+      <router-link to="/category">모든 연구 보러가기</router-link>
       <v-card color="elevation-0 background">
         <v-card-title
-          ><v-icon class="mr-2 primary--text">mdi-file-question-outline</v-icon>
+          ><img
+            id="image"
+            class="mr-2"
+            src="../assets/giftIcon.png"
+            alt="logo"
+          />
           지금 바로 온라인 설문 참여하고 경품 받아 가세요</v-card-title
         >
         <div v-for="item in online.slice(0, 5)" v-bind:key="item.postid">
           <v-card class="mb-4 pa-3 text-sm-left">
-            <span class="primary--text">{{ item.state }} </span>
-            <span>{{ item.title }}</span>
+            <v-row>
+              <v-col cols="9">
+                <span class="primary--text">모집중 </span>
+                <span :style="{ color: hover ? 'red' : 'black' }"
+                  ><router-link id="link" :to="`/page/${item.id}`"
+                    >{{ item.title }}
+                  </router-link></span
+                >
+              </v-col>
 
-            <span> <v-icon>mdi-bookmark-outline</v-icon></span>
-            <button @click="bookmark(item.id)">북마크</button>
-            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
-
+              <v-col cols="3">
+                <span class="d-flex justify-end" v-if="book_check[item.id]">
+                  <button @click="deletefunc(item.id)">
+                    <v-icon id="checked">mdi-bookmark</v-icon>
+                  </button>
+                </span>
+                <span class="d-flex justify-end" v-else>
+                  <button @click="bookmark(item.id)">
+                    <v-icon id="book">mdi-bookmark-outline</v-icon>
+                  </button>
+                </span>
+              </v-col>
+            </v-row>
             <div class="text--text text-caption">
               <span>
                 <v-btn color="elevation-0 box" x-small>{{
@@ -159,12 +230,14 @@
                 }}</v-btn>
               </span>
               <span> {{ item.start_date }}~{{ item.end_date }} |</span>
-              <span> {{ item.period }} |</span>
-              <span> {{ item.location }}</span>
+              <span> 약{{ item.period }}시간 소요 |</span>
+              <span> {{ item.pay }}원 |</span>
+              <span> {{ item.zone_1 }} {{ item.zone_2 }}</span>
             </div>
           </v-card>
         </div>
       </v-card>
+      <router-link to="/category">모든 연구 보러가기</router-link>
     </v-container>
   </div>
 </template>
@@ -175,11 +248,11 @@ export default {
     this.$http
       .get("/api/post")
       .then((res) => {
-        const user = res.data.user;
+        // const user = res.data.user;
         this.post = res.data.research;
-        console.log(user);
-        console.log("post");
-        console.log(this.post);
+        // console.log(user);
+        // console.log("post");
+        // console.log(this.post);
 
         let i;
         for (i = 0; i < this.post.length; i++) {
@@ -201,29 +274,117 @@ export default {
             this.online.push(this.post[i]);
           }
         }
-        console.log(this.student);
-        console.log(this.company);
-        console.log(this.online);
+        for (i = 0; i < this.post.length; i++) {
+          this.total = this.total + this.post[i].pay;
+        }
+        this.slides[0] =
+          "현재 진행중인 연구 " +
+          this.post.length +
+          "개를 참여하고 최대 " +
+          this.total +
+          "원 받아가세요!";
+        // console.log(this.student);
+        // console.log(this.company);
+        // console.log(this.online);
       })
       .catch((err) => {
         console.error(err);
       });
+    this.$http
+      .get(`/api/user/${this.$store.state.user.id}/follow`)
+      .then((res) => {
+        let i;
+        let j;
+        this.book_check = [];
+        this.bookmarks = [];
+        for (i = 0; i < res.data.research[0].Followers.length; i++) {
+          this.bookmarks.push(res.data.research[0].Followers[i].id);
+        }
+
+        // console.log(this.bookmarks);
+
+        for (j = 0; j < this.bookmarks.length; j++) {
+          for (i = 0; i < this.post.length; i++) {
+            if (this.bookmarks[j] === this.post[i].id) {
+              this.book_check[this.post[i].id] = true;
+            }
+          }
+        }
+        // console.log(this.book_check);
+      });
   },
   methods: {
     bookmark(id) {
-      this.$http.post(`/api/user/${id}/follow`).then((res) => {
-        console.log(res);
+      this.$http.post(`/api/user/${id}/follow`).then(() => {
+        // console.log(res);
       });
+      this.$http
+        .get(`/api/user/${this.$store.state.user.id}/follow`)
+        .then((res) => {
+          let i;
+          let j;
+          this.book_check = [];
+          this.bookmarks = [];
+          for (i = 0; i < res.data.research[0].Followers.length; i++) {
+            this.bookmarks.push(res.data.research[0].Followers[i].id);
+          }
+
+          // console.log(this.bookmarks);
+
+          for (j = 0; j < this.bookmarks.length; j++) {
+            for (i = 0; i < this.post.length; i++) {
+              if (this.bookmarks[j] === this.post[i].id) {
+                this.book_check[this.post[i].id] = true;
+              }
+            }
+          }
+          // console.log(this.book_check);
+        });
+    },
+    deletefunc(id) {
+      this.$http.post(`/api/user/delete/${id}`).then(() => {
+        // console.log(res);
+        // console.log("click");
+        // console.log("delete");
+      });
+      this.$http
+        .get(`/api/user/${this.$store.state.user.id}/follow`)
+        .then((res) => {
+          let i;
+          let j;
+          this.bookmarks = [];
+          this.book_check = [];
+          for (i = 0; i < res.data.research[0].Followers.length; i++) {
+            this.bookmarks.push(res.data.research[0].Followers[i].id);
+          }
+
+          // console.log(this.bookmarks);
+
+          for (j = 0; j < this.bookmarks.length; j++) {
+            for (i = 0; i < this.post.length; i++) {
+              if (this.bookmarks[j] === this.post[i].id) {
+                this.book_check[this.post[i].id] = true;
+              }
+            }
+          }
+          // console.log(this.book_check);
+        });
     },
   },
   data() {
     return {
       show: false,
+      total: 0,
       items: ["Foo", "Bar", "Fizz", "Buzz"],
+      bookmarks: [],
+      book_check: [],
       post: [],
       student: [],
+      student_book: [],
       company: [],
+      company_book: [],
       online: [],
+      online_book: [],
       s_state: [],
       c_state: [],
       o_state: [],
@@ -235,6 +396,9 @@ export default {
 };
 </script>
 <style lang="scss">
+#image {
+  width: 1.5em;
+}
 .v-text-field--outlined fieldset {
   color: #ffd740 !important;
   border-color: #ffd740;
@@ -243,8 +407,22 @@ export default {
 #top {
   background: white;
 }
-
+#link {
+  color: black;
+}
+#link:hover {
+  color: #2979ff;
+}
 .v-btn .v-btn__content .v-icon {
   color: black;
+}
+#book {
+  text-align: left;
+}
+#book:hover {
+  color: #ffd740;
+}
+#checked {
+  color: #ffd740;
 }
 </style>

@@ -35,7 +35,7 @@
       </v-card>
       <v-card class="d-flex flex-row mb-2" color="elevation-0">
         <div class="mr-2">소요시간</div>
-        <div>{{ this.post.period }}분</div>
+        <div>{{ this.post.period }}시간</div>
       </v-card>
       <v-card class="d-flex flex-row mb-2" color="elevation-0">
         <div class="mr-2">지급 비용</div>

@@ -9,7 +9,7 @@
         <v-btn
           style="width: 100%"
           color="button"
-          class="white--text"
+          class="white--text mb-4"
           elevation="2"
           large
           >+ 새 연구 생성하기</v-btn
@@ -19,12 +19,15 @@
         <v-card
           v-for="item in post"
           v-bind:key="item.id"
-          class="mb-4 pa-2 text-sm-left"
+          class="mb-4 pa-3 text-sm-left"
         >
           <span class="primary--text">모집중 </span>
-          <span>{{ item.title }}</span>
+          <span :style="{ color: hover ? 'red' : 'black' }"
+            ><router-link id="link" :to="`/page/${item.id}`"
+              >{{ item.title }}
+            </router-link></span
+          >
 
-          <span> <v-icon>mdi-bookmark-outline</v-icon></span>
           <span>
             <button
               @click="deletefunc(item.id)"
@@ -34,7 +37,7 @@
             >
               delete
             </button>
-            <router-link :to="`/page/${item.id}`">자세히보기 </router-link>
+            <!-- <router-link :to="`/page/${item.id}`">자세히보기 </router-link> -->
             <router-link :to="`/edit/${item.id}`">수정하기</router-link>
           </span>
           <div class="text--text text-caption">
@@ -62,13 +65,19 @@
 /* .v-btn {
   width: 100%;
 } */
+#link {
+  color: black;
+}
+#link:hover {
+  color: #2979ff;
+}
 </style>
 <script>
 export default {
   computed: {
     user() {
-      console.log("user");
-      console.log(this.$store.state.user);
+      // console.log("user");
+      // console.log(this.$store.state.user);
       return this.$store.getters.user;
     },
   },
@@ -78,12 +87,12 @@ export default {
       .then((res) => {
         const user = res.data.user;
         this.post = res.data.research;
-        console.log(user);
-        console.log("post");
-        console.log(this.post);
+        // console.log(user);
+        // console.log("post");
+        // console.log(this.post);
         if (user) {
           this.$store.commit("setUser", user);
-          console.log(this.$store.state);
+          // console.log(this.$store.state);
         }
       })
       .catch((err) => {
@@ -93,17 +102,17 @@ export default {
 
   methods: {
     deletefunc(id) {
-      this.$http.post(`/api/post/delete/${id}`).then((res) => {
-        console.log(res);
+      this.$http.post(`/api/post/delete/${id}`).then(() => {
+        // console.log(res);
       });
       this.$http
         .get(`/api/post/mypage/${this.$store.state.user.id}`)
         .then((res) => {
-          const user = res.data.user;
+          // const user = res.data.user;
           this.post = res.data.research;
-          console.log(user);
-          console.log("post");
-          console.log(this.post);
+          // console.log(user);
+          // console.log("post");
+          // console.log(this.post);
         })
         .catch((err) => {
           console.error(err);
