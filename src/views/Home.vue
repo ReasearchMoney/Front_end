@@ -138,8 +138,8 @@
           </v-card>
         </div>
       </v-card>
-      <router-link to="/category">모든 연구 보러가기</router-link>
-      <v-card color="elevation-0 background">
+      <router-link to="/category" id="view_all">모든 연구 보러가기</router-link>
+      <v-card color="elevation-0 background" class="mt-5">
         <v-card-title>
           <img
             id="image"
@@ -187,8 +187,8 @@
           </v-card>
         </div>
       </v-card>
-      <router-link to="/category">모든 연구 보러가기</router-link>
-      <v-card color="elevation-0 background">
+      <router-link to="/category" id="view_all">모든 연구 보러가기</router-link>
+      <v-card color="elevation-0 background" class="mt-5">
         <v-card-title
           ><img
             id="image"
@@ -237,7 +237,7 @@
           </v-card>
         </div>
       </v-card>
-      <router-link to="/category">모든 연구 보러가기</router-link>
+      <router-link to="/category" id="view_all">모든 연구 보러가기</router-link>
     </v-container>
   </div>
 </template>
@@ -245,6 +245,7 @@
 <script>
 export default {
   created() {
+    // window.location.reload();
     this.$http
       .get("/api/post")
       .then((res) => {
@@ -286,31 +287,40 @@ export default {
         // console.log(this.student);
         // console.log(this.company);
         // console.log(this.online);
+        this.book_check = [];
+        this.bookmarks = [];
+      })
+      .then(() => {
+        this.$http
+          .get(`/api/user/${this.$store.state.user.id}/follow`)
+          .then((res) => {
+            console.log("working");
+            let i;
+
+            for (i = 0; i < res.data.research[0].Followers.length; i++) {
+              this.bookmarks.push(res.data.research[0].Followers[i].id);
+            }
+            console.log("이건 먼저 동작", this.bookmarks);
+          })
+          .then(() => {
+            let i;
+            let j;
+            this.book_check = [];
+            for (j = 0; j < this.bookmarks.length; j++) {
+              for (i = 0; i < this.post.length; i++) {
+                if (this.bookmarks[j] === this.post[i].id) {
+                  this.book_check[this.post[i].id] = true;
+                }
+              }
+            }
+            console.log("이게 동작해야 함", this.book_check);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       })
       .catch((err) => {
         console.error(err);
-      });
-    this.$http
-      .get(`/api/user/${this.$store.state.user.id}/follow`)
-      .then((res) => {
-        let i;
-        let j;
-        this.book_check = [];
-        this.bookmarks = [];
-        for (i = 0; i < res.data.research[0].Followers.length; i++) {
-          this.bookmarks.push(res.data.research[0].Followers[i].id);
-        }
-
-        // console.log(this.bookmarks);
-
-        for (j = 0; j < this.bookmarks.length; j++) {
-          for (i = 0; i < this.post.length; i++) {
-            if (this.bookmarks[j] === this.post[i].id) {
-              this.book_check[this.post[i].id] = true;
-            }
-          }
-        }
-        // console.log(this.book_check);
       });
   },
   methods: {
@@ -396,6 +406,10 @@ export default {
 };
 </script>
 <style lang="scss">
+#view_all {
+  font-size: 0.9rem;
+  color: #9ea7ad;
+}
 #image {
   width: 1.5em;
 }

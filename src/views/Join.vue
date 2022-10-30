@@ -1,9 +1,9 @@
 <template>
   <div id="contain">
-    <v-container>
+    <v-container style="width: 100vh; max-width: 40%">
       <form action="api/auth/join" method="post">
-        <h1>리서치머니 회원가입</h1>
-        <div>이메일</div>
+        <h1 class="text-md-center pt-10 pb-10">리서치머니 회원가입</h1>
+        <div class="pb-3 text-sm-left">이메일</div>
         <v-text-field
           type="emai"
           name="email"
@@ -11,7 +11,7 @@
           filled
           dense
         ></v-text-field>
-        <div>닉네임</div>
+        <div class="pb-3 text-sm-left">닉네임</div>
         <v-text-field
           tyoe="text"
           name="nickname"
@@ -19,7 +19,7 @@
           filled
           dense
         ></v-text-field>
-        <div>비밀번호</div>
+        <div class="pb-3 text-sm-left">비밀번호</div>
         <v-text-field
           type="password"
           name="password"
@@ -27,14 +27,22 @@
           filled
           dense
         ></v-text-field>
-        <div>비밀번호 확인</div>
+        <div class="pb-3 text-sm-left">비밀번호 확인</div>
         <v-text-field
           type="password"
           label="Filled"
           filled
           dense
         ></v-text-field>
-        <v-btn type="submit">동의하고 가입 완료하기</v-btn>
+        <v-btn
+          type="submit"
+          style="width: 100%"
+          color="button"
+          class="white--text mb-4"
+          elevation="2"
+          large
+          >동의하고 가입 완료하기</v-btn
+        >
       </form>
     </v-container>
   </div>

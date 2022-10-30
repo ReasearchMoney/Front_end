@@ -94,6 +94,7 @@ export default {
       console.log("it works1");
 
       console.log("it works2");
+
       this.$store.commit("setUser", null);
       this.$http
         .get("/api/auth/logout")
@@ -101,6 +102,7 @@ export default {
           console.log("send success");
 
           this.$router.push("/");
+          window.location.reload();
         })
         .catch((err) => {
           console.error(err);

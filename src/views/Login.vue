@@ -1,26 +1,38 @@
 <template>
   <div id="contain">
-    <v-container style="width: 100vh max-width:100%">
-      <form action="api/auth/login" method="post">
-        <h1>리서치머니 로그인</h1>
-        <div>아이디</div>
-        <v-text-field
-          label="Filled"
-          type="email"
-          name="email"
-          filled
-          dense
-        ></v-text-field>
-        <div>비밀번호</div>
-        <v-text-field
-          label="Filled"
-          type="password"
-          name="password"
-          filled
-          dense
-        ></v-text-field>
-        <v-btn type="submit">로그인</v-btn>
-      </form>
+    <v-container style="width: 100vh; max-width: 40%">
+      <v-card color="elevation-0">
+        <v-card-title> </v-card-title>
+        <h1 class="text-md-center pt-15 pb-15">리서치머니 로그인</h1>
+        <form action="api/auth/login" method="post">
+          <div class="pb-3 text-sm-left">아이디</div>
+          <v-text-field
+            label="Filled"
+            type="email"
+            name="email"
+            filled
+            dense
+          ></v-text-field>
+          <div class="pb-3 text-sm-left">비밀번호</div>
+          <v-text-field
+            label="Filled"
+            type="password"
+            name="password"
+            filled
+            dense
+          ></v-text-field>
+
+          <v-btn
+            type="submit"
+            style="width: 100%"
+            color="button"
+            class="white--text mb-4"
+            elevation="2"
+            large
+            >로그인</v-btn
+          >
+        </form>
+      </v-card>
     </v-container>
   </div>
 </template>
@@ -58,5 +70,8 @@ export default {
 #contain {
   background: white;
   height: 100vh;
+}
+h1 {
+  text-align: center;
 }
 </style>

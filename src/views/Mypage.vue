@@ -2,8 +2,12 @@
   <v-container style="width: 100vh; max-width: 60%">
     <v-card color="elevation-0 background">
       <v-card-title class="pt-15">
-        <v-icon class="mr-2 primary--text">mdi-domain</v-icon>내가 업로드한
-        연구</v-card-title
+        <img
+          id="image"
+          class="mr-2"
+          src="../assets/upload.png"
+          alt="logo"
+        />내가 업로드한 연구</v-card-title
       >
       <router-link to="/post">
         <v-btn
@@ -21,35 +25,43 @@
           v-bind:key="item.id"
           class="mb-4 pa-3 text-sm-left"
         >
-          <span class="primary--text">모집중 </span>
-          <span :style="{ color: hover ? 'red' : 'black' }"
-            ><router-link id="link" :to="`/page/${item.id}`"
-              >{{ item.title }}
-            </router-link></span
-          >
+          <v-row>
+            <v-col cols="9">
+              <router-link :to="`/edit/${item.id}`">
+                <img id="icon" class="mr-2" src="../assets/edit.png" alt="logo"
+              /></router-link>
+              <span class="primary--text">모집중 </span>
+              <span :style="{ color: hover ? 'red' : 'black' }"
+                ><router-link id="link" :to="`/page/${item.id}`"
+                  >{{ item.title }}
+                </router-link></span
+              >
+            </v-col>
+            <v-col cols="3">
+              <span class="d-flex justify-end">
+                <button
+                  @click="deletefunc(item.id)"
+                  id="twit-btn"
+                  type="submit"
+                  class="btn"
+                >
+                  <v-icon id="book" color="red">mdi-delete-outline</v-icon>
+                </button>
+                <!-- <router-link :to="`/page/${item.id}`">자세히보기 </router-link> -->
+              </span>
+            </v-col>
+          </v-row>
 
-          <span>
-            <button
-              @click="deletefunc(item.id)"
-              id="twit-btn"
-              type="submit"
-              class="btn"
-            >
-              delete
-            </button>
-            <!-- <router-link :to="`/page/${item.id}`">자세히보기 </router-link> -->
-            <router-link :to="`/edit/${item.id}`">수정하기</router-link>
-          </span>
           <div class="text--text text-caption">
             <span>
               <v-btn color="elevation-0 box" x-small>{{
-                item.institution_name
+                item.institution
               }}</v-btn>
             </span>
             <span> {{ item.start_date }}~{{ item.end_date }} |</span>
-            <span> {{ item.period }} |</span>
-            <span> {{ item.zone_1 }}</span>
-            <span> {{ item.zone_2 }}</span>
+            <span> 약{{ item.period }}시간 소요 |</span>
+            <span> {{ item.pay }}원 |</span>
+            <span> {{ item.zone_1 }} {{ item.zone_2 }}</span>
           </div>
         </v-card>
       </div>
@@ -70,6 +82,12 @@
 }
 #link:hover {
   color: #2979ff;
+}
+#image {
+  width: 1.5em;
+}
+#icon {
+  width: 1em;
 }
 </style>
 <script>

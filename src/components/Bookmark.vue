@@ -2,8 +2,12 @@
   <v-container style="width: 100vh; max-width: 60%">
     <v-card color="elevation-0 background">
       <v-card-title class="pt-15">
-        <v-icon class="mr-2 primary--text">mdi-domain</v-icon>내가 북마크한
-        연구</v-card-title
+        <img
+          id="image"
+          class="mr-2"
+          src="../assets/bookmark.png"
+          alt="logo"
+        />내가 북마크한 연구</v-card-title
       >
 
       <div v-if="post[0]">
@@ -13,7 +17,7 @@
           class="mb-4 pa-3 text-sm-left"
         >
           <v-row>
-            <v-col>
+            <v-col cols="9">
               <span class="primary--text">모집중 </span>
 
               <span>
@@ -22,7 +26,7 @@
                 }}</router-link>
               </span>
             </v-col>
-            <v-col>
+            <v-col cols="3">
               <span class="d-flex justify-end">
                 <button @click="deletefunc(item.id)">
                   <v-icon id="book">mdi-bookmark</v-icon>
@@ -34,13 +38,13 @@
           <div class="text--text text-caption">
             <span>
               <v-btn color="elevation-0 box" x-small>{{
-                item.institution_name
+                item.institution
               }}</v-btn>
             </span>
             <span> {{ item.start_date }}~{{ item.end_date }} |</span>
-            <span> {{ item.period }} |</span>
-            <span> {{ item.zone_1 }}</span>
-            <span> {{ item.zone_2 }}</span>
+            <span> 약{{ item.period }}시간 소요 |</span>
+            <span> {{ item.pay }}원 |</span>
+            <span> {{ item.zone_1 }} {{ item.zone_2 }}</span>
           </div>
         </v-card>
       </div>

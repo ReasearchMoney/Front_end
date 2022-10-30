@@ -1,245 +1,237 @@
 <template>
-  <v-container class="mb-0" style="max-width: 100%" color="white" id="top">
-    <h2>새 연구 추가</h2>
-    <form id="myform">
-      <v-container style="max-width: 60%">
-        <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 class="pr-5 mt-2">제목</h3>
+  <div id="contain">
+    <v-container
+      class="mb-0"
+      style="width: 100vh; max-width: 60%"
+      color="white"
+      id="top"
+    >
+      <h2 class="pb-10 mb-10 text-sm-left">
+        <img id="image" class="mr-2" src="../assets/plus.png" alt="logo" />새
+        연구 추가하기
+      </h2>
+      <form id="myform">
+        <v-container>
+          <v-card class="d-flex flex-row mb-6 elevation-0">
+            <h3 class="pr-5 mt-2">제목</h3>
 
-          <v-text-field
-            name="title"
-            label="Filled"
-            placeholder="Dense & Rounded"
-            filled
-            dense
-          ></v-text-field>
-        </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 name="post" class="pr-5 mt-2">설명</h3>
+            <v-text-field
+              name="title"
+              placeholder="40자 이내로 적어주세요"
+              filled
+              dense
+            ></v-text-field>
+          </v-card>
+          <v-card class="d-flex flex-row mb-6 elevation-0">
+            <h3 class="pr-5 mt-2">기관종류</h3>
+            <v-select
+              :items="items"
+              name="institution"
+              filled
+              dense
+              placeholder="대학 | 기업 | 개인"
+            ></v-select>
+            <h3 class="pr-5 mt-2 ml-3">기관명</h3>
 
-          <v-textarea
-            label="Filled"
-            name="post"
-            placeholder="Dense & Rounded"
-            filled
-            dense
-          ></v-textarea>
-        </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 class="pr-5 mt-2">모집기간</h3>
+            <v-text-field
+              name="institution_name"
+              placeholder="기관명 작성"
+              filled
+              dense
+            ></v-text-field>
+          </v-card>
+          <v-card class="d-flex flex-row mb-6 elevation-0">
+            <h3 class="pr-5 mt-2">지역</h3>
 
-          <v-menu
-            ref="menu"
-            v-model="menu"
-            :close-on-content-click="false"
-            :return-value.sync="date"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="date"
-                name="start_date"
-                label="Picker in menu"
-                prepend-icon="mdi-calendar"
-                readonly
-                filled
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="menu = false"> Cancel </v-btn>
-              <v-btn text color="primary" @click="$refs.menu.save(date)">
-                OK
-              </v-btn>
-            </v-date-picker>
-          </v-menu>
-          <div>~</div>
-          <v-menu
-            ref="menu2"
-            v-model="menu2"
-            :close-on-content-click="false"
-            :return-value.sync="date2"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="date2"
-                name="end_date"
-                label="Picker in menu2"
-                prepend-icon="mdi-calendar"
-                readonly
-                filled
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="date2" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="menu2 = false">
-                Cancel
-              </v-btn>
-              <v-btn text color="primary" @click="$refs.menu2.save(date2)">
-                OK
-              </v-btn>
-            </v-date-picker>
-          </v-menu>
-        </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 class="pr-5 mt-2">실험기간</h3>
+            <v-text-field
+              name="zone_1"
+              placeholder="시"
+              filled
+              dense
+            ></v-text-field>
+            <v-text-field
+              class="ml-3"
+              name="zone_2"
+              placeholder="군/구"
+              filled
+              dense
+            ></v-text-field>
+          </v-card>
 
-          <v-menu
-            ref="menu3"
-            v-model="menu3"
-            :close-on-content-click="false"
-            :return-value.sync="date3"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="date3"
-                name="start_date_r"
-                label="Picker in menu3"
-                prepend-icon="mdi-calendar"
-                readonly
-                filled
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="date3" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="menu3 = false">
-                Cancel
-              </v-btn>
-              <v-btn text color="primary" @click="$refs.menu3.save(date3)">
-                OK
-              </v-btn>
-            </v-date-picker>
-          </v-menu>
-          <div>~</div>
-          <v-menu
-            ref="menu4"
-            v-model="menu4"
-            :close-on-content-click="false"
-            :return-value.sync="date4"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="date4"
-                name="end_date_r"
-                label="Picker in menu4"
-                prepend-icon="mdi-calendar"
-                readonly
-                filled
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="date4" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="menu4 = false">
-                Cancel
-              </v-btn>
-              <v-btn text color="primary" @click="$refs.menu4.save(date4)">
-                OK
-              </v-btn>
-            </v-date-picker>
-          </v-menu>
-        </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 class="pr-5 mt-2">소요시간</h3>
+          <v-card class="d-flex flex-row mb-6 elevation-0">
+            <h3 class="pr-5 mt-2">모집기간</h3>
 
-          <v-text-field label="Solo" name="period" filled dense></v-text-field>
-          <h3 class="pr-5 mt-2">피험자 지급비용</h3>
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              :return-value.sync="date"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date"
+                  name="start_date"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  filled
+                  v-bind="attrs"
+                  v-on="on"
+                  dense
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu = false">
+                  Cancel
+                </v-btn>
+                <v-btn text color="primary" @click="$refs.menu.save(date)">
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
+            <div class="mr-3 ml-3">~</div>
+            <v-menu
+              ref="menu2"
+              v-model="menu2"
+              :close-on-content-click="false"
+              :return-value.sync="date2"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date2"
+                  name="end_date"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  filled
+                  v-bind="attrs"
+                  v-on="on"
+                  dense
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date2" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu2 = false">
+                  Cancel
+                </v-btn>
+                <v-btn text color="primary" @click="$refs.menu2.save(date2)">
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
+          </v-card>
+          <v-card class="d-flex flex-row mb-6 elevation-0">
+            <h3 class="pr-5 mt-2">실험기간</h3>
 
-          <v-text-field label="Solo" name="pay" filled dense></v-text-field>
-        </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 class="pr-5 mt-2">추가 URL</h3>
+            <v-menu
+              ref="menu3"
+              v-model="menu3"
+              :close-on-content-click="false"
+              :return-value.sync="date3"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date3"
+                  name="start_date_r"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  filled
+                  v-bind="attrs"
+                  v-on="on"
+                  dense
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date3" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu3 = false">
+                  Cancel
+                </v-btn>
+                <v-btn text color="primary" @click="$refs.menu3.save(date3)">
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
+            <div class="mr-3 ml-3">~</div>
+            <v-menu
+              ref="menu4"
+              v-model="menu4"
+              :close-on-content-click="false"
+              :return-value.sync="date4"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date4"
+                  name="end_date_r"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  filled
+                  v-bind="attrs"
+                  v-on="on"
+                  dense
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date4" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu4 = false">
+                  Cancel
+                </v-btn>
+                <v-btn text color="primary" @click="$refs.menu4.save(date4)">
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
+          </v-card>
+          <v-card class="d-flex flex-row mb-6 elevation-0">
+            <h3 class="pr-5 mt-2">소요시간</h3>
 
-          <v-text-field
-            label="Filled"
-            name="url"
-            placeholder="Dense & Rounded"
-            filled
-            dense
-          ></v-text-field>
-        </v-card>
-        <!-- <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 class="pr-5 mt-2">이미지</h3>
-          <v-file-input
-            class="input"
-            type="file"
-            counter
-            show-size
-            label="이미지 제출(여러개 가능)"
-            outlined
-            dense
-            multiple
-            prepend-icon="mdi-camera"
-            style="width: 400px; margin-left: 100px"
-            @change="onImageChange"
-          />
-          <v-img
-            v-for="(item, i) in uploadimageurl"
-            :key="i"
-            :src="item.url"
-            contain
-            height="150px"
-            width="200px"
-            style="border: 2px solid black; margin-left: 100px"
-          />
-        </v-card> -->
-        <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 class="pr-5 mt-2">기관명</h3>
+            <v-text-field
+              name="period"
+              filled
+              dense
+              placeholder="시간 단위로 작성"
+            ></v-text-field>
+            <h3 class="pr-5 mt-2 ml-3">피험자 지급비용</h3>
 
-          <v-text-field
-            label="Filled"
-            name="institution_name"
-            placeholder="Dense & Rounded"
-            filled
-            dense
-          ></v-text-field>
-        </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 class="pr-5 mt-2">지역</h3>
+            <v-text-field
+              name="pay"
+              filled
+              dense
+              placeholder="숫자만 입력"
+            ></v-text-field>
+          </v-card>
+          <v-card class="d-flex flex-row mb-6 elevation-0">
+            <h3 name="post" class="pr-5 mt-2">설명</h3>
 
-          <v-text-field
-            label="Filled"
-            name="zone_1"
-            placeholder="Dense & Rounded"
-            filled
-            dense
-          ></v-text-field>
-          <v-text-field
-            label="Filled"
-            name="zone_2"
-            placeholder="Dense & Rounded"
-            filled
-            dense
-          ></v-text-field>
-        </v-card>
-        <v-card class="d-flex flex-row mb-6 elevation-0">
-          <h3 class="pr-5 mt-2">기관종류</h3>
-          <v-select
-            :items="items"
-            name="institution"
-            filled
-            label="Filled style"
-          ></v-select>
-        </v-card>
-        <!-- <v-card class="d-flex flex-row mb-6 elevation-0">
+            <v-textarea
+              name="post"
+              placeholder="연구 내용 설명"
+              filled
+              dense
+            ></v-textarea>
+          </v-card>
+          <v-card class="d-flex flex-row mb-6 elevation-0">
+            <h3 class="pr-5 mt-2">추가 URL</h3>
+
+            <v-text-field
+              name="url"
+              placeholder="첨부할 URL 입력"
+              filled
+              dense
+            ></v-text-field>
+          </v-card>
+
+          <!-- <v-card class="d-flex flex-row mb-6 elevation-0">
           <h3 class="pr-5 mt-2">태그</h3>
 
           <v-text-field
@@ -249,14 +241,30 @@
             dense
           ></v-text-field>
         </v-card> -->
-      </v-container>
-      <v-btn @click="sendPost()">누르시오</v-btn>
-    </form>
-  </v-container>
+        </v-container>
+
+        <v-btn
+          @click="sendPost()"
+          style="width: 100%"
+          color="button"
+          class="white--text mb-4"
+          elevation="2"
+          large
+          >등록 완료하기</v-btn
+        >
+      </form>
+    </v-container>
+  </div>
 </template>
 <style lang="scss" scoped>
 #top {
   background: white;
+}
+#contain {
+  background: white;
+}
+#image {
+  width: 1.2em;
 }
 </style>
 <script>

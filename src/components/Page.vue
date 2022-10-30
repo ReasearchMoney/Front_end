@@ -1,61 +1,77 @@
 <template>
-  <v-container class="mb-0" style="max-width: 100%" color="white" id="top">
-    <div>
-      <h1>[실험 신청서] {{ this.post.title }}</h1>
-      {{ this.$route.params.id }}
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">작성자</div>
-        <div>{{ this.post.User.nickname }}</div>
-      </v-card>
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">기관종류</div>
-        <div>{{ this.post.institution }}</div>
-      </v-card>
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">기관명</div>
-        <div>{{ this.post.institution_name }}</div>
-      </v-card>
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">지역</div>
-        <div class="mr-2">{{ this.post.zone_1 }}</div>
-        <div>{{ this.post.zone_2 }}</div>
-      </v-card>
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">모집 기간</div>
-        <div class="mr-2">{{ this.post.start_date }}</div>
-        <div>~</div>
-        <div>{{ this.post.end_date }}</div>
-      </v-card>
+  <div id="contain">
+    <v-container
+      class="mb-0"
+      style="width: 100vh; max-width: 40%"
+      color="white"
+      id="top"
+    >
+      <div>
+        <h1 class="mb-15 pb-10">{{ this.post.title }}</h1>
 
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">실험 기간</div>
-        <div class="mr-2">{{ this.post.start_date_r }}</div>
-        <div>~</div>
-        <div>{{ this.post.end_date_r }}</div>
-      </v-card>
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">소요시간</div>
-        <div>{{ this.post.period }}시간</div>
-      </v-card>
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">지급 비용</div>
-        <div>{{ this.post.pay }}원</div>
-      </v-card>
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">연구 설명</div>
-        <div>{{ this.post.post }}</div>
-      </v-card>
-      <v-card class="d-flex flex-row mb-2" color="elevation-0">
-        <div class="mr-2">추가 URL</div>
-        <div>{{ this.post.url }}</div>
-      </v-card>
-    </div>
-  </v-container>
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-8" id="category">작성자</div>
+          <div id="text">{{ this.post.User.nickname }}</div>
+        </v-card>
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-5" id="category">기관종류</div>
+          <div id="text">{{ this.post.institution }}</div>
+        </v-card>
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-8" id="category">기관명</div>
+          <div id="text">{{ this.post.institution_name }}</div>
+        </v-card>
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-11" id="category">지역</div>
+          <div class="mr-2" id="text">{{ this.post.zone_1 }}</div>
+          <div id="text">{{ this.post.zone_2 }}</div>
+        </v-card>
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-4" id="category">모집 기간</div>
+          <div class="mr-2" id="text">{{ this.post.start_date }}</div>
+          <div id="text">~</div>
+          <div id="text">{{ this.post.end_date }}</div>
+        </v-card>
+
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-4" id="category">실험 기간</div>
+          <div class="mr-2" id="text">{{ this.post.start_date_r }}</div>
+          <div id="text">~</div>
+          <div id="text">{{ this.post.end_date_r }}</div>
+        </v-card>
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-4" id="category">소요시간</div>
+          <div id="text">{{ this.post.period }}시간</div>
+        </v-card>
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-4" id="category">지급 비용</div>
+          <div id="text">{{ this.post.pay }}원</div>
+        </v-card>
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-4" id="category">연구 설명</div>
+          <div id="text" class="text-sm-left">{{ this.post.post }}</div>
+        </v-card>
+        <v-card class="d-flex flex-row mb-4" color="elevation-0">
+          <div class="mr-4" id="category">추가 URL</div>
+          <div id="text">{{ this.post.url }}</div>
+        </v-card>
+      </div>
+    </v-container>
+  </div>
 </template>
 <style lang="scss" scoped>
 #top {
   background: white;
-  height: 95vh;
+}
+#contain {
+  background: white;
+  height: 100vh;
+}
+#category {
+  color: #808991;
+}
+#text {
+  color: #40474d;
 }
 </style>
 <script>
