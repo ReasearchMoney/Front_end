@@ -99,7 +99,7 @@
         </v-card-title>
 
         <div v-for="item in student.slice(0, 5)" v-bind:key="item.postid">
-          <v-card class="pa-3 text-sm-left">
+          <v-card class="mb-4 pa-3 text-sm-left">
             <v-row>
               <v-col cols="9">
                 <span class="primary--text">모집중 </span>
