@@ -14,7 +14,10 @@ module.exports = {
         }
     }
   },
-  devServer: { 
+  devServer: {
+    disableHostCheck: true,
+        port: 8080,
+        public: '0.0.0.0:8080',
     proxy: { 
       '/api': { 
         target: 'http://93.188.164.90:3001/api',
