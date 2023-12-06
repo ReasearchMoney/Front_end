@@ -1,24 +1,57 @@
-# research_money
+# research money
 
-## Project setup
-```
-yarn install
-```
+| SWYG 2차 사이드 프로젝트 참여
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+| 기획자 : 조정민 (프로젝트 기획, UI/UX 디자인)
+| 개발자 : 황수민 (풀스택 개발, 데이터베이스 구축 및 연결)
 
-### Compiles and minifies for production
+## Project 사용 스택
+
+- Vue.js + Vuetify
+- Node.js + Express.js
+- Figma
+- Notion
+- Github
+- MySQL + MySQL Workbench
+- Sequelize ORM
+
+## 프로젝트 구상 배경
+
+**_연구 알바에 참여하고픈 대학원생과 대학원생을 필요로하는 기관이 전용으로 사용할 수 있는 알바 모집 사이트가 있다면, 남은 시간을 효율적으로 투자하여 돈을 벌 수 있지 않을까?_**
+
+대학원생이신 정민씨께서 대학원 생활을 하면서 늘 불편했던 경험을 토대로 이번 SWYG 리서치 머니의 초기 프로젝트의 큰 틀이 마련되었습니다. 아르바이트나 취업을 목적으로 하는 다른 서비스와 유사한 서비스를 제공하지만, 오로지 연구를 목적으로 한 전문 인력의 모집과 지원에 집중되어있다는 점에서, 다른 SWYG 참여자들로부터 호응을 얻은 아이디어입니다.
+
+작접 Figma로 제작된 디자인을 토대로 웹 개발이 진행되었으며, 비교적 짧은 프로젝트 기간을 염두하여 필수적인 기능들(회원가입, 공고 작성, 공고 수정, 공고 삭제, 북마크, 게시판) 위주로 구현되었으며 백엔드 코드의 경우, 현재 비공개 상태입니다.
+
+## 프로젝트 구현
+
+### 프론트엔드 개발
+
+1. 회원가입
+
 ```
 yarn build
 ```
 
-### Lints and fixes files
+2. 공고 작성
+3. 북마크
+
+### 백엔드 개발
+
+1. 회원가입 API
+2. 공고 작성 API
+3. 북마크 API
+
 ```
 yarn lint
 ```
 
+### 데이터베이스
+
+1. 데이터베이스 구성
+
+## 프로젝트를 마치며
+
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
